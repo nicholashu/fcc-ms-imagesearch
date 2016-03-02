@@ -17,7 +17,7 @@ function ClickHandler () {
 	};
 
 	this.getImages = function (req, res) {
-		api500px.photos.searchByTerm(req.params.searchTerm, {'sort': 'created_at', 'rpp': '10'},  function(error, results) {
+		api500px.photos.searchByTerm(req.params.searchTerm, {'sort': 'rating', 'rpp': req.query.offset},  function(error, results) {
 		  if (error) {
 		    // Error! 
 		    return;

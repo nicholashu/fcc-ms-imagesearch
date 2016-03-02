@@ -24,6 +24,6 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 
-	app.route('/api/imagesearch/:searchTerm')
+	app.route('/api/imagesearch/:searchTerm?offset')
 		.get(clickHandler.getImages);
 };
