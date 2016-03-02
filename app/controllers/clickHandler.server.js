@@ -1,6 +1,8 @@
 'use strict';
 
 var Users = require('../models/users.js');
+var API500px = require('500px'),
+    api500px = new API500px('HDuQNNnsZrvUIoRLOBpMmnFsQjYJFhMu1Tu041Lf');
 
 function ClickHandler () {
 
@@ -14,15 +16,15 @@ function ClickHandler () {
 			});
 	};
 
-	this.addClick = function (req, res) {
-		Users
-			.findOneAndUpdate({ 'github.id': req.user.github.id }, { $inc: { 'nbrClicks.clicks': 1 } })
-			.exec(function (err, result) {
-					if (err) { throw err; }
-
-					res.json(result.nbrClicks);
-				}
-			);
+	this.getImages = function (req, res) {
+		api500px.photos.getPopular({'sort': 'created_at', 'rpp': '10'},  function(error, results) {
+		  if (error) {
+		    // Error! 
+		    return;
+		  }
+		 
+		 res.json(results); 
+		});
 	};
 
 	this.resetClicks = function (req, res) {
