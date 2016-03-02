@@ -36,6 +36,7 @@ function imageSearch () {
 		    return;
 		  }
 		 var imageArray = [];
+		 console.log(results)
 		 results.photos.forEach(function(photo){
 		 	var temp = {
 		 		name:	photo.name,
