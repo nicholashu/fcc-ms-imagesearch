@@ -17,13 +17,20 @@ function ClickHandler () {
 	};
 
 	this.getImages = function (req, res) {
-		api500px.photos.getPopular({'sort': 'created_at', 'rpp': '10'},  function(error, results) {
+		api500px.photos.searchByTerm(req.params.searchTerm, {'sort': 'created_at', 'rpp': '10'},  function(error, results) {
 		  if (error) {
 		    // Error! 
 		    return;
 		  }
-		 
-		 res.json(results); 
+		 var imageArray = [];
+		 results.photos.forEach(function(photo){
+		 	var temp = {
+		 		name:	photo.name,
+		 		image_url: photo.image_url
+		 	};
+		 	imageArray.push(temp);
+		 })
+		 res.json(imageArray); 
 		});
 	};
 
