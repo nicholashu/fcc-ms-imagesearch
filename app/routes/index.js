@@ -1,19 +1,17 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var ImageSearch = require(path + '/app/controllers/imageSearch.server.js');
 
 module.exports = function (app, passport) {
 
 
-	var clickHandler = new ClickHandler();
+	var imageSearch = new ImageSearch();
 
 	app.route('/')
 		.get( function (req, res) {
 			res.sendFile(path + '/public/index.html');
 		});
-
-
 
 	app.route('/auth/github')
 		.get(passport.authenticate('github'));
@@ -24,6 +22,9 @@ module.exports = function (app, passport) {
 			failureRedirect: '/login'
 		}));
 
-	app.route('/api/imagesearch/:searchTerm?offset')
-		.get(clickHandler.getImages);
+	app.route('/api/imagesearch/:searchTerm?')
+		.get(imageSearch.getImages);
+		
+	app.route('/api/latest/imagesearch')
+		.get(imageSearch.getSearches);
 };
