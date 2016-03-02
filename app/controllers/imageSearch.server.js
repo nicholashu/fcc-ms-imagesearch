@@ -36,11 +36,11 @@ function imageSearch () {
 		    return;
 		  }
 		 var imageArray = [];
-		 console.log(results)
 		 results.photos.forEach(function(photo){
 		 	var temp = {
-		 		name:	photo.name,
-		 		image_url: photo.image_url
+		 		alt:	photo.name,
+		 		image_url: photo.image_url,
+		 		link: 'https://500px.com/' + photo.url
 		 	};
 		 	imageArray.push(temp);
 		 })
